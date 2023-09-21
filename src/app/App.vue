@@ -1,7 +1,9 @@
 <template>
   <div>
     <my-table :columns="tableColumns" :data="tableData"></my-table>
-    <Modal  v-model="isOpen">Содержимое модального окна</Modal>
+    <Modal  v-model="isOpen">
+      <add-to-table></add-to-table>
+    </Modal>
     <my-button theme="primary" @click="openModal">add</my-button>
   </div>
 </template>
@@ -13,18 +15,23 @@ import {defineComponent, ref} from "vue";
 import MyTable from "@/shared/ui/table/my-table.vue";
 import Modal from "@/shared/ui/modal/modal.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
+import MyInput from "@/shared/ui/input/my-input.vue";
+import AddToTable from "@/pages/table-ppage/ui/add-to-table/add-to-table.vue";
 
 
 
 export default defineComponent({
-  components: {MyButton, Modal, MyTable },
+  components: {AddToTable, MyInput, MyButton, Modal, MyTable },
   setup(){
     const isOpen = ref(false)
+
+    const text = ref("")
+
     const openModal = () => {
       isOpen.value = true
     }
 
-    return {isOpen, openModal}
+    return {isOpen, openModal,text}
   },
 
 
