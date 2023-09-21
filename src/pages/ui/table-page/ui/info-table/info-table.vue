@@ -27,16 +27,8 @@ export default {
       isOpen.value = true
     }
 
-
     return {isOpen, openModal, tableData}
   },
-
-  methods: {
-    ...mapActions({
-      fetchData: "infoTable/fetchData",
-    })
-  },
-
 
 
 
