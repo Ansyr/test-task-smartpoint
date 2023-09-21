@@ -1,10 +1,6 @@
 <template>
   <div>
-    <my-table :columns="tableColumns" :data="tableData"></my-table>
-    <Modal  v-model="isOpen">
-      <add-to-table></add-to-table>
-    </Modal>
-    <my-button theme="primary" @click="openModal">add</my-button>
+    <InfoTable/>
   </div>
 </template>
 
@@ -15,41 +11,14 @@ import {defineComponent, ref} from "vue";
 import MyTable from "@/shared/ui/table/my-table.vue";
 import Modal from "@/shared/ui/modal/modal.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
+import AddToTable from "@/pages/ui/table-page/ui/add-to-table/add-to-table.vue";
 import MyInput from "@/shared/ui/input/my-input.vue";
-import AddToTable from "@/pages/table-ppage/ui/add-to-table/add-to-table.vue";
-
+import InfoTable from "@/pages/ui/table-page/ui/info-table/info-table.vue";
 
 
 export default defineComponent({
-  components: {AddToTable, MyInput, MyButton, Modal, MyTable },
-  setup(){
-    const isOpen = ref(false)
+  components: {InfoTable}
 
-    const text = ref("")
-
-    const openModal = () => {
-      isOpen.value = true
-    }
-
-    return {isOpen, openModal,text}
-  },
-
-
-  data() {
-    return {
-      tableColumns: [
-        { id: 1, key: "City" , title: "Город" },
-        { id: 2, key: "Population" , title: 'Количество людей' },
-        { id: 3, key: "Cars", title: 'Количество машин'},
-      ],
-
-      tableData: [
-        { City: "New York", Population: 8537673, Cars: 2532146 },
-        { City: "Los Angeles", Population: 39776830, Cars: 6192815 },
-        { City: "Chicago", Population: 2716000, Cars: 1151999 },
-      ]
-    };
-  }
 })
 </script>
 

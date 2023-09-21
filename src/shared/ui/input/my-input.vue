@@ -2,6 +2,7 @@
 import {ref} from "vue";
 
 export default {
+  name: 'my-input',
   props: {
     size: {
       type: String,

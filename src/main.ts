@@ -8,6 +8,8 @@ const app = createApp(App)
 
 
 app
+    .use(store)
     .mount('#app')
 import "bootstrap/dist/js/bootstrap.js";
+import store from "@/app/providers/store.ts";
 
