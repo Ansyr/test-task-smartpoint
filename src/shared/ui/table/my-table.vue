@@ -21,10 +21,10 @@ const rows = computed(() => {
 </script>
 
 <template>
-    <table class="table ">
+    <table class="table">
       <thead>
       <tr>
-        <th scope="col" v-for="column in columns" :key="column.id">
+        <th class="bg-primary" scope="col" v-for="column in columns" :key="column.id">
           {{ column.title }}
           <span></span>
         </th>
