@@ -6,10 +6,11 @@
     <my-input v-model="data.cars" placeholder="Машины"></my-input>
     <my-button theme="primary" type="submit">Отправить</my-button>
   </form>
+  <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
 </template>
 
 <script>
-import { ref } from "vue";
+import {computed, ref} from "vue";
 import MyInput from "@/shared/ui/input/my-input.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
 import {useStore} from "vuex";
@@ -17,13 +18,14 @@ import {useStore} from "vuex";
 export default {
   components: { MyInput, MyButton },
   setup() {
+    const store = useStore();
     const data = ref({
       city: "",
       population: "",
       cars: "",
     });
 
-    const store = useStore();
+    const errorMessage = computed(() => store.state.infoTable.errorMessage)
 
     const handleSubmit = () => {
       const formData = {
@@ -39,7 +41,7 @@ export default {
 
 
 
-    return { data, handleSubmit };
+    return { data, handleSubmit,errorMessage};
   },
 };
 </script>

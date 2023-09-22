@@ -7,6 +7,9 @@
   <div>
     <PolarAreaCity></PolarAreaCity>
   </div>
+  <div>
+    <bar-auto-population></bar-auto-population>
+  </div>
 
 </template>
 
@@ -19,9 +22,10 @@ import MyButton from "@/shared/ui/button/my-button.vue";
 import {computed, ref} from "vue";
 import {useStore} from "vuex";
 import PolarAreaCity from "@/pages/info-table/ui/polar-area-city-population/polar-area-city-population.vue";
+import BarAutoPopulation from "@/pages/info-table/ui/bar-auto-population/bar-auto-population.vue";
 
 export default {
-  components: {PolarAreaCity, MyInput, AddToTable, MyButton, Modal, MyTable},
+  components: {BarAutoPopulation, PolarAreaCity, MyInput, AddToTable, MyButton, Modal, MyTable},
   setup() {
     const store = useStore()
     const isOpen = ref(false)

@@ -31,10 +31,6 @@ export default {
         ],
       };
     });
-
-
-
-
     return { totalData, options }
   },
 
