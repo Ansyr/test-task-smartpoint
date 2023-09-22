@@ -1,5 +1,6 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <h1>Заполните данные</h1>
+  <form class="form-group" @submit.prevent="handleSubmit">
     <my-input v-model="data.city" placeholder="Город"></my-input>
     <my-input v-model="data.population" placeholder="Население"></my-input>
     <my-input v-model="data.cars" placeholder="Машины"></my-input>
@@ -11,7 +12,7 @@
 import { ref } from "vue";
 import MyInput from "@/shared/ui/input/my-input.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
-import {mapActions, useStore} from "vuex";
+import {useStore} from "vuex";
 
 export default {
   components: { MyInput, MyButton },
@@ -40,11 +41,5 @@ export default {
 
     return { data, handleSubmit };
   },
-
-
-  ...mapActions( {
-    addToTable: "infoTable/addToTable"
-  }),
-
 };
 </script>

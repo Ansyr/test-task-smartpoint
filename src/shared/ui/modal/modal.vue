@@ -27,12 +27,14 @@ export default defineComponent({
 </script>
 
 <template>
+  <teleport to="body">
     <div class="modal" v-if="isOpen">
       <div @click.stop class="modal__content">
         <slot></slot>
         <my-button theme="danger"  @click="closeModal">закрыть</my-button>
       </div>
     </div>
+  </teleport>
 </template>
 
 <style>
