@@ -11,7 +11,10 @@ export const tableModule = {
     state: () => {
         return {
             dataTable: mock as DataState[],
-            errorMessage: null
+            errorMessage: null,
+
+            statisticCity: null,
+            statisticPopulation: null
         };
     },
     mutations: {
@@ -31,14 +34,39 @@ export const tableModule = {
         },
         SET_ERROR_MESSAGE(state,message){
             state.errorMessage = message
+        },
+        SET_TOTAL_DATA_CITY(state, getters) {
+            const cityStatistic = getters.cityStatistic;
+            const dataTable = {
+                labels: cityStatistic?.map(city => city.label),
+                datasets: [
+                    {
+                        backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
+                        data: cityStatistic?.map(val => val.value),
+                    }
+                ]
+            }
+            state.statisticCity = dataTable;
+        },
+
+
+        SET_TOTAL_DATA_POPULATION(state,getters){
+            const carToPopulationRatio = getters.carToPopulationRatio
+            const dataTable = {
+                labels: carToPopulationRatio?.map(city => city.label),
+                datasets: [{
+                    backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
+                    data: carToPopulationRatio?.map(val => val.value)
+                }]
+            }
+            state.statisticPopulation = dataTable
+
         }
     },
+
     getters: {
         totalDataTable(state) {
             return state.dataTable;
-        },
-        totalData(state) {
-            return state.totalData;
         },
         cityStatistic(state) {
             const totalPopulation = state.dataTable.reduce((total, city) => total + parseFloat(city.population), 0);
@@ -55,14 +83,25 @@ export const tableModule = {
         },
     },
     actions: {
-        addToTable({ commit }, formData) {
-            if (typeof formData.city === 'string' && typeof formData.population === 'number' && typeof formData.cars === 'number') {
+        addToTable({ commit, getters }, formData) {
+            if (formData.city && formData.population && formData.cars) {
                 commit('ADD_TO_TABLE', formData);
                 commit('SET_ERROR_MESSAGE', null);
-            } else {
+                commit('SET_TOTAL_DATA_CITY', getters);
+                commit("SET_TOTAL_DATA_POPULATION",getters)
+            }
+            else {
                 console.error('Некорректные данные. Заполните все поля.');
                 commit("SET_ERROR_MESSAGE","Некорректные данные")
             }
         },
+
+        setTotalCity({commit,getters}) {
+            commit('SET_TOTAL_DATA_CITY', getters);
+        },
+
+        setTotalPopulation({commit,getters}){
+            commit("SET_TOTAL_DATA_POPULATION",getters)
+        }
     },
 };

@@ -19,7 +19,7 @@ import MyTable from "@/shared/ui/table/my-table.vue";
 import AddToTable from "@/pages/info-table/ui/add-to-table/add-to-table.vue";
 import MyInput from "@/shared/ui/input/my-input.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {useStore} from "vuex";
 import PolarAreaCity from "@/pages/info-table/ui/polar-area-city-population/polar-area-city-population.vue";
 import BarAutoPopulation from "@/pages/info-table/ui/bar-auto-population/bar-auto-population.vue";
@@ -35,7 +35,14 @@ export default {
       isOpen.value = true
     }
 
+    watch(
+        () => store.getters.cityStatistic,
+        (newValue, oldValue) => {
+          console.log("City Statistic has changed", newValue, oldValue);
+        }
+    );
     return {isOpen, openModal, tableData}
+
   },
 
 
