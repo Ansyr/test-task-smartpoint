@@ -1,9 +1,9 @@
 <script lang="ts">
-import {ref, defineComponent} from "vue";
+import { ref, defineComponent, onMounted, onBeforeUnmount } from "vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
 
 export default defineComponent({
-  components: {MyButton},
+  components: { MyButton },
   props: {
     modelValue: Boolean,
   },
@@ -12,12 +12,25 @@ export default defineComponent({
     const isOpen = ref(props.modelValue);
 
     const closeModal = () => {
-      console.log(123)
       isOpen.value = false;
       context.emit("update:modelValue", false);
     };
 
-    return { isOpen, closeModal};
+    onMounted(() => {
+      window.addEventListener("keydown", handleEscKey);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("keydown", handleEscKey);
+    });
+
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen.value) {
+        closeModal();
+      }
+    };
+
+    return { isOpen, closeModal };
   },
   watch: {
     modelValue(newValue) {
@@ -27,10 +40,11 @@ export default defineComponent({
 });
 </script>
 
+
 <template>
   <teleport to="body">
     <div class="modal" v-if="isOpen"  @click="closeModal">
-      <div @click.stop class="modal__content" tabindex="0" @keyup.esc="closeModal">
+      <div @click.stop class="modal__content">
         <slot></slot>
         <div class="modal__header">
           <svg class="modal__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" @click="closeModal">
