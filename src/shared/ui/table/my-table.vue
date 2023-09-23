@@ -22,11 +22,12 @@ const rows = computed(() => {
 
 <template>
     <table class="table">
-      <thead>
+      <thead class="thead-light">
       <tr>
         <th class="bg-primary" scope="col" v-for="column in columns" :key="column.id">
-          {{ column.title }}
-          <span></span>
+          <p class="text-white">
+            {{ column.title }}
+          </p>
         </th>
       </tr>
       </thead>

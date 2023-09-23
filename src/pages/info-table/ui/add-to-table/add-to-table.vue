@@ -1,5 +1,4 @@
 <template>
-  <h1>Заполните данные</h1>
   <form class="form-group" @submit.prevent="handleSubmit">
     <my-input v-model="data.city" placeholder="Город"></my-input>
     <my-input v-model="data.population" placeholder="Население"></my-input>

@@ -1,14 +1,30 @@
 <template>
-  <my-table :columns="tableColumns" :data="tableData"></my-table>
-  <Modal v-model="isOpen">
-    <add-to-table></add-to-table>
-  </Modal>
-  <MyButton @click="openModal">ADD</MyButton>
-  <div>
-    <PolarAreaCity></PolarAreaCity>
-  </div>
-  <div>
-    <bar-auto-population></bar-auto-population>
+  <div class="row p-2">
+    <div class="col-sm">
+      <MyButton @click="openModal">Добавить</MyButton>
+    </div>
+    <div class="row">
+      <my-table :columns="tableColumns" :data="tableData"></my-table>
+      <Modal v-model="isOpen">
+        <div slot="header">
+          Введите данные
+        </div>
+        <div slot="body">
+          <add-to-table></add-to-table>
+        </div>
+      </Modal>
+
+      <div class="row">
+        <div class="col-sm">
+          <PolarAreaCity></PolarAreaCity>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <bar-auto-population></bar-auto-population>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>

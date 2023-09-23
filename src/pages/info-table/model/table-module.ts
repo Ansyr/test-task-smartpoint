@@ -37,7 +37,7 @@ export const tableModule = {
         },
         SET_TOTAL_DATA_CITY(state, getters) {
             const cityStatistic = getters.cityStatistic;
-            const dataTable = {
+            state.statisticCity = {
                 labels: cityStatistic?.map(city => city.label),
                 datasets: [
                     {
@@ -45,21 +45,20 @@ export const tableModule = {
                         data: cityStatistic?.map(val => val.value),
                     }
                 ]
-            }
-            state.statisticCity = dataTable;
+            };
         },
 
 
         SET_TOTAL_DATA_POPULATION(state,getters){
             const carToPopulationRatio = getters.carToPopulationRatio
-            const dataTable = {
+            state.statisticPopulation = {
                 labels: carToPopulationRatio?.map(city => city.label),
                 datasets: [{
+                    label:"автомобили/жители",
                     backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
                     data: carToPopulationRatio?.map(val => val.value)
                 }]
             }
-            state.statisticPopulation = dataTable
 
         }
     },
