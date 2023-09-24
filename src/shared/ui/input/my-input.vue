@@ -1,3 +1,14 @@
+<template>
+  <input
+      type="text"
+      :value="inputText"
+      class="form-control"
+      aria-label="Small"
+      aria-describedby="inputGroup-sizing-sm"
+      @input="onChangeInput"
+  >
+</template>
+
 <script>
 import {ref} from "vue";
 
@@ -19,19 +30,6 @@ export default {
   }
 }
 </script>
-
-<template>
-  <input
-      type="text"
-      :value="inputText"
-      class="form-control"
-      aria-label="Small"
-      aria-describedby="inputGroup-sizing-sm"
-      @input="onChangeInput"
-  >
-</template>
-
-
 
 <style lang="scss" scoped>
 

@@ -44,7 +44,7 @@
 <script>
 import Modal from "@/shared/ui/modal/modal.vue";
 import MyTable from "@/shared/ui/table/my-table.vue";
-import AddToTable from "@/pages/info-table/ui/add-to-table/add-to-table.vue";
+import AddToTable from "@/pages/info-table/ui/add-to-table-form/add-to-table-form.vue";
 import MyInput from "@/shared/ui/input/my-input.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
 import {computed, ref, watch} from "vue";

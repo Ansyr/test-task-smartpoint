@@ -1,4 +1,5 @@
 import mock from "./mock.json"
+import {getRandomColors} from "@/shared/lib/get-random-colors.ts";
 
 interface DataState {
     city: string,
@@ -37,11 +38,12 @@ export const tableModule = {
         },
         SET_TOTAL_DATA_CITY(state, getters) {
             const cityStatistic = getters.cityStatistic;
+            const backgroundColors = cityStatistic.map((_) => getRandomColors())
             state.statisticCity = {
                 labels: cityStatistic?.map(city => city.label),
                 datasets: [
                     {
-                        backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
+                        backgroundColor: backgroundColors,
                         data: cityStatistic?.map(val => val.value),
                     }
                 ]
@@ -51,11 +53,12 @@ export const tableModule = {
 
         SET_TOTAL_DATA_POPULATION(state, getters) {
             const carToPopulationRatio = getters.carToPopulationRatio
+            const backgroundColors = carToPopulationRatio.map((_) => getRandomColors())
             state.statisticPopulation = {
                 labels: carToPopulationRatio?.map(city => city.label),
                 datasets: [{
                     label: "автомобили/жители",
-                    backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
+                    backgroundColor: backgroundColors,
                     data: carToPopulationRatio?.map(val => val.value)
                 }]
             }
