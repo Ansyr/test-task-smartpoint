@@ -1,10 +1,10 @@
 import mock from "./mock.json"
-import {getRandomColors} from "@/shared/lib/get-random-colors.ts";
 
 interface DataState {
     city: string,
     population: number,
-    cars: number
+    cars: number,
+    backgroundColor: string
 }
 
 
@@ -29,8 +29,9 @@ export const tableModule = {
                 existingCity.cars = String(
                     parseFloat(existingCity.cars) + parseFloat(formData.cars)
                 );
+                existingCity.backgroundColor = formData.backgroundColor;
             } else {
-                state.dataTable.push(formData);
+                state.dataTable.push({...formData, backgroundColor: formData.backgroundColor});
             }
         },
         SET_ERROR_MESSAGE(state, message) {
@@ -38,12 +39,11 @@ export const tableModule = {
         },
         SET_TOTAL_DATA_CITY(state, getters) {
             const cityStatistic = getters.cityStatistic;
-            const backgroundColors = cityStatistic.map((_) => getRandomColors())
             state.statisticCity = {
                 labels: cityStatistic?.map(city => city.label),
                 datasets: [
                     {
-                        backgroundColor: backgroundColors,
+                        backgroundColor: cityStatistic.map(val => val.backgroundColor),
                         data: cityStatistic?.map(val => val.value),
                     }
                 ]
@@ -53,12 +53,12 @@ export const tableModule = {
 
         SET_TOTAL_DATA_POPULATION(state, getters) {
             const carToPopulationRatio = getters.carToPopulationRatio
-            const backgroundColors = carToPopulationRatio.map((_) => getRandomColors())
+            console.log(carToPopulationRatio)
             state.statisticPopulation = {
                 labels: carToPopulationRatio?.map(city => city.label),
                 datasets: [{
                     label: "автомобили/жители",
-                    backgroundColor: backgroundColors,
+                    backgroundColor: carToPopulationRatio.map(val => val.backgroundColor),
                     data: carToPopulationRatio?.map(val => val.value)
                 }]
             }
@@ -75,12 +75,14 @@ export const tableModule = {
             return state.dataTable.map(city => ({
                 label: city.city,
                 value: (parseFloat(city.population) / totalPopulation).toFixed(4),
+                backgroundColor: city.backgroundColor
             }));
         },
         carToPopulationRatio(state) {
-            return state.dataTable.map(city => ({
-                label: city.city,
-                value: parseFloat(city.cars) / parseFloat(city.population),
+            return state.dataTable.map(val => ({
+                label: val.city,
+                value: parseFloat(val.cars) / parseFloat(val.population),
+                backgroundColor: val.backgroundColor
             }));
         },
     },

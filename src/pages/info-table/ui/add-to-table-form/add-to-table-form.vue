@@ -43,6 +43,7 @@ import MyInput from "@/shared/ui/input/my-input.vue";
 import MyButton from "@/shared/ui/button/my-button.vue";
 import {useStore} from "vuex";
 import FormInput from "@/shared/ui/form-input/form-input.vue";
+import randomColor from "randomcolor";
 
 export default {
   components: {FormInput, MyInput, MyButton },
@@ -52,6 +53,7 @@ export default {
       city: "",
       population: "",
       cars: "",
+      backgroundColor: "",
     });
 
     const errorMessage = computed(() => store.state.infoTable.errorMessage)
@@ -62,13 +64,17 @@ export default {
         city: data.value.city,
         population: data.value.population,
         cars: data.value.cars,
+        backgroundColor: randomColor({
+          luminosity: 'light'
+        })
       };
-
+      console.log(formData.backgroundColor)
       store.dispatch("addToTable",formData)
 
       data.city = ""
       data.population = ""
       data.cars = ""
+      data.backgroundColor = ""
     };
 
 

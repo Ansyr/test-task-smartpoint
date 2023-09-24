@@ -2,31 +2,37 @@
   {
     "city": "Москва",
     "population": 12678079,
-    "cars": 3800000
+    "cars": 3800000,
+    "backgroundColor": "#FF5733"
   },
   {
     "city": "Санкт-Петербург",
     "population": 5383890,
-    "cars": 2520000
+    "cars": 2520000,
+    "backgroundColor": "#33FF57"
   },
   {
     "city": "Новосибирск",
     "population": 1612833,
-    "cars": 800000
+    "cars": 800000,
+    "backgroundColor": "#5733FF"
   },
   {
     "city": "Екатеринбург",
     "population": 1493749,
-    "cars": 625000
+    "cars": 625000,
+    "backgroundColor": "#FFFF33"
   },
   {
     "city": "Казань",
     "population": 1257391,
-    "cars": 820000
+    "cars": 820000,
+    "backgroundColor": "#FF33FF"
   },
   {
     "city": "Волгоград",
     "population": 2127391,
-    "cars": 620000
+    "cars": 620000,
+    "backgroundColor": "#33FFFF"
   }
 ]
