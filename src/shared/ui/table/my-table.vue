@@ -41,6 +41,4 @@ const rows = computed(() => {
 });
 
 </script>
-<style scoped>
 
-</style>
