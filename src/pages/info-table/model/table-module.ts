@@ -32,7 +32,7 @@ export const tableModule = {
                 state.dataTable.push(formData);
             }
         },
-        SET_ERROR_MESSAGE(state,message){
+        SET_ERROR_MESSAGE(state, message) {
             state.errorMessage = message
         },
         SET_TOTAL_DATA_CITY(state, getters) {
@@ -49,12 +49,12 @@ export const tableModule = {
         },
 
 
-        SET_TOTAL_DATA_POPULATION(state,getters){
+        SET_TOTAL_DATA_POPULATION(state, getters) {
             const carToPopulationRatio = getters.carToPopulationRatio
             state.statisticPopulation = {
                 labels: carToPopulationRatio?.map(city => city.label),
                 datasets: [{
-                    label:"автомобили/жители",
+                    label: "автомобили/жители",
                     backgroundColor: ['#FF5733', '#33FF57', '#5733FF', '#FFFF33'],
                     data: carToPopulationRatio?.map(val => val.value)
                 }]
@@ -82,19 +82,35 @@ export const tableModule = {
         },
     },
     actions: {
-        addToTable({ commit, getters }, formData) {
+        addToTable({commit, getters}, formData) {
+            const cityRegex = /^[A-Za-z\s-]+$/;
+            const populationRegex = /^[1-9]\d*$/;
+            const carsRegex = /^[0-9]\d*$/;
             if (formData.city && formData.population && formData.cars) {
+                if (!cityRegex.test(formData.city)) {
+                    console.error('Некорректное название города.');
+                    commit("SET_ERROR_MESSAGE", "Некорректное название города");
+                    return;
+                }
+                if (!populationRegex.test(formData.population)) {
+                    console.error('Некорректное население.');
+                    commit("SET_ERROR_MESSAGE", "Некорректное население");
+                    return;
+                }
+                if (!carsRegex.test(formData.cars)) {
+                    console.error('Некорректное количество автомобилей.');
+                    commit("SET_ERROR_MESSAGE", "Некорректное количество автомобилей");
+                    return;
+                }
                 commit('ADD_TO_TABLE', formData);
                 commit('SET_ERROR_MESSAGE', null);
                 commit('SET_TOTAL_DATA_CITY', getters);
-                commit("SET_TOTAL_DATA_POPULATION",getters)
-            }
-            else {
+                commit("SET_TOTAL_DATA_POPULATION", getters);
+            } else {
                 console.error('Некорректные данные. Заполните все поля.');
-                commit("SET_ERROR_MESSAGE","Некорректные данные")
+                commit("SET_ERROR_MESSAGE", "Некорректные данные");
             }
         },
-
         setTotalCity({commit,getters}) {
             commit('SET_TOTAL_DATA_CITY', getters);
         },
@@ -102,5 +118,6 @@ export const tableModule = {
         setTotalPopulation({commit,getters}){
             commit("SET_TOTAL_DATA_POPULATION",getters)
         }
-    },
-};
+
+    }
+}

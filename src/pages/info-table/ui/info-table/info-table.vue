@@ -7,7 +7,7 @@
       <my-table :columns="tableColumns" :data="tableData"></my-table>
       <Modal v-model="isOpen">
         <div slot="header">
-          Введите данные
+
         </div>
         <div slot="body">
           <add-to-table></add-to-table>

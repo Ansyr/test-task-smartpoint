@@ -43,7 +43,7 @@ export default defineComponent({
 
 <template>
   <teleport to="body">
-    <div class="modal" v-if="isOpen"  @click="closeModal">
+    <div class="modal" v-if="isOpen">
       <div @click.stop class="modal__content">
         <slot></slot>
         <div class="modal__header">
