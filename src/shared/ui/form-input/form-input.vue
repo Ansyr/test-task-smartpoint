@@ -25,7 +25,7 @@ export default {
     label: String,
     placeholder: String,
     errorMessage: String,
-    required: Boolean
+    required: Boolean,
   },
 
 }

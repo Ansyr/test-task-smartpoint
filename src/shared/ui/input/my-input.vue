@@ -1,6 +1,5 @@
 <template>
   <input
-      type="text"
       :value="inputText"
       class="form-control"
       aria-label="Small"
@@ -9,18 +8,14 @@
   >
 </template>
 
-<script>
+<script lang="ts">
 import {ref} from "vue";
+
 
 export default {
   name: 'my-input',
-  props: {
-    size: {
-      type: String,
-      default: "Default"
-    }
-  },
-  setup(props,context){
+  setup(_,context){
+
     const inputText = ref("")
     const onChangeInput = (event) => {
       inputText.value = event.target.value

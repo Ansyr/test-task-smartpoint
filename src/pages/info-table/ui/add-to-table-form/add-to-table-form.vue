@@ -60,21 +60,17 @@ export default {
 
 
     const handleSubmit = () => {
+      const existingCity = store.getters.totalDataTable.find(city => city.city.toLowerCase() === data.value.city.toLowerCase());
+
       const formData = {
         city: data.value.city,
         population: data.value.population,
         cars: data.value.cars,
-        backgroundColor: randomColor({
+        backgroundColor: existingCity ? existingCity.backgroundColor : randomColor({
           luminosity: 'light'
         })
       };
-      console.log(formData.backgroundColor)
-      store.dispatch("addToTable",formData)
-
-      data.city = ""
-      data.population = ""
-      data.cars = ""
-      data.backgroundColor = ""
+      store.dispatch("addToTable", formData);
     };
 
 
