@@ -8,9 +8,8 @@
 <script lang="ts">
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Pie } from 'vue-chartjs'
-import * as chartConfig from './chartConfig.js'
 import {useStore} from "vuex";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, Ref, ref, watch} from "vue";
 
 
 ChartJS.register(ArcElement, Tooltip, Legend)
@@ -23,8 +22,8 @@ export default {
   setup(){
     const store = useStore()
     const totalData = computed(() => store.state.infoTable.statisticCity)
-    const { options } = chartConfig
-    const chart = ref(null)
+
+    const chart: Ref<any> | null = ref(null)
     onMounted(() => {
       store.dispatch("setTotalCity")
     })
@@ -34,6 +33,11 @@ export default {
         chart.value.$refs.chart.renderChart()
       }
     })
+
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+    }
 
     return { options, totalData, chart }
   },

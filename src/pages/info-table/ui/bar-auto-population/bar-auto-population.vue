@@ -16,9 +16,9 @@ import {
   LinearScale
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
-import * as chartConfig from './chartConfig'
 import {useStore} from "vuex";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, Ref, ref, watch} from "vue";
+
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -31,9 +31,11 @@ export default {
     const store = useStore()
     const totalData = computed(() => store.state.infoTable.statisticPopulation)
 
-    const {options} = chartConfig
-
-    const chart = ref(null)
+    const chart: Ref<any> | null = ref(null)
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false
+    }
 
     onMounted(() => {
       store.dispatch("setTotalPopulation")

@@ -1,6 +1,6 @@
 <template>
-  <div class="row p-2">
-    <div class="col-sm">
+  <div class="row m-2 m-5">
+    <div class="col-sm pb-2">
       <MyButton @click="openModal">Добавить</MyButton>
     </div>
     <div class="row">
@@ -13,14 +13,26 @@
           <add-to-table></add-to-table>
         </div>
       </Modal>
-
+      <div class="row">
+        <div class="col-sm pt-4">
+          <h1>
+            Статистика
+          </h1>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm">
+          <h2 class="pt-4 pb-4">
+            Доли жителей по городам
+          </h2>
           <PolarAreaCity></PolarAreaCity>
         </div>
       </div>
       <div class="row">
         <div class="col-sm">
+          <h2 class="pt-4 pb-4">
+            Соотношение автомобили/жители
+          </h2>
           <bar-auto-population></bar-auto-population>
         </div>
       </div>
@@ -50,6 +62,7 @@ export default {
     const openModal = () => {
       isOpen.value = true
     }
+
 
     watch(
         () => store.getters.cityStatistic,

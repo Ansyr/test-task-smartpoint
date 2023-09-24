@@ -19,7 +19,7 @@ export const tableModule = {
     },
     mutations: {
         ADD_TO_TABLE(state, formData) {
-            const existingCityIndex = state.dataTable.findIndex(city => city.city === formData.city);
+            const existingCityIndex = state.dataTable.findIndex(city => city.city.toLowerCase() === formData.city.toLowerCase());
             if (existingCityIndex !== -1) {
                 const existingCity = state.dataTable[existingCityIndex];
                 existingCity.population = String(
@@ -83,21 +83,24 @@ export const tableModule = {
     },
     actions: {
         addToTable({commit, getters}, formData) {
-            const cityRegex = /^[A-Za-z\s-]+$/;
+            const cityRegex = /^[A-Za-zА-Яа-я\s-]+$/;
             const populationRegex = /^[1-9]\d*$/;
             const carsRegex = /^[0-9]\d*$/;
+            const maxPopulationLength = 9;
+            const maxCarsLength = 9;
+
             if (formData.city && formData.population && formData.cars) {
                 if (!cityRegex.test(formData.city)) {
                     console.error('Некорректное название города.');
                     commit("SET_ERROR_MESSAGE", "Некорректное название города");
                     return;
                 }
-                if (!populationRegex.test(formData.population)) {
+                if (!populationRegex.test(formData.population) || formData.population.length > maxPopulationLength) {
                     console.error('Некорректное население.');
                     commit("SET_ERROR_MESSAGE", "Некорректное население");
                     return;
                 }
-                if (!carsRegex.test(formData.cars)) {
+                if (!carsRegex.test(formData.cars) || formData.cars.length > maxCarsLength) {
                     console.error('Некорректное количество автомобилей.');
                     commit("SET_ERROR_MESSAGE", "Некорректное количество автомобилей");
                     return;

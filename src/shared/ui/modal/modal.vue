@@ -75,6 +75,10 @@ export default defineComponent({
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
 }
 
 .modal__content {
@@ -84,7 +88,11 @@ export default defineComponent({
   background: white;
   border-radius: 12px;
   min-height: 50px;
-  min-width: 300px;
+  min-width: 400px;
+
+  overflow: hidden;
+  max-width: 90%;
+  overflow-y: auto;
 }
 
 .modal__icon{
