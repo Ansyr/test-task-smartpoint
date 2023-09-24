@@ -10,7 +10,4 @@ Server start
 
 ### `yarn run dev`
 
-<br/>
-
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 <br/><br/>
